@@ -9,33 +9,30 @@ var Promise = require('es6-promise').Promise
 var $ = require("jquery")
 var backbone = require("backbone")
 
-function qs(selector) {
-	return document.querySelector(selector)
-}
-
 import * as templates from "./templates.js"
+
 
 var CalculatorView = backbone.View.extend({
 	el: '.container',
 	events: {
-		'click .enter span': 'append_to_console',
+		'click .nums': 'append_to_console',
 		'click .clear': 'clear_screen',
 		'click .evaluate': 'evaluate_input'
 	},
-	append_to_console: (evt) => {
+	append_to_console: function(evt) {
 		console.log(evt)
-		qs('.console').innerText += evt.currentTarget.innerText
+		this.el.querySelector('.console span').innerText += evt.currentTarget.innerText
 	},
-	clear_screen: () => {
-		qs('.console').innerText = ''
+	clear_screen: function(){
+		this.el.querySelector('.console span').innerText = ''
 	},
-	evaluate_input: () => {
-		qs('.console').innerText = eval(qs('.console').innerText)
+	evaluate_input: function() {
+		this.el.querySelector('.console span').innerText = eval(this.el.querySelector('.console').innerText)
 	},
-	initialize: () => {
-		qs('body').innerHTML=templates.calcHTML
+	initialize: function() {
+		this.el.innerHTML = templates.calcHTML
 	}
 
 })
 
-var displayCalc = new CalculatorView()
+window.displayCalc = new CalculatorView()
