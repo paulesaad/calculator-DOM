@@ -6,21 +6,36 @@ require("es5-shim")
 require("babel/register")
 
 var Promise = require('es6-promise').Promise
-// just Node?
-// var fetch = require('node-fetch')
-// Browserify?
-// require('whatwg-fetch') //--> not a typo, don't store as a var
+var $ = require("jquery")
+var backbone = require("backbone")
 
-// other stuff that we don't really use in our own code
-// var Pace = require("../bower_components/pace/pace.js")
+function qs(selector) {
+	return document.querySelector(selector)
+}
 
-// require your own libraries, too!
-// var Router = require('./app.js')
+import * as templates from "./templates.js"
 
-// window.addEventListener('load', app)
+var CalculatorView = backbone.View.extend({
+	el: '.container',
+	events: {
+		'click .enter span': 'append_to_console',
+		'click .clear': 'clear_screen',
+		'click .evaluate': 'evaluate_input'
+	},
+	append_to_console: (evt) => {
+		console.log(evt)
+		qs('.console').innerText += evt.currentTarget.innerText
+	},
+	clear_screen: () => {
+		qs('.console').innerText = ''
+	},
+	evaluate_input: () => {
+		qs('.console').innerText = eval(qs('.console').innerText)
+	},
+	initialize: () => {
+		qs('body').innerHTML=templates.calcHTML
+	}
 
-// function app() {
-    // start app
-    // new Router()
-// }
+})
 
+var displayCalc = new CalculatorView()

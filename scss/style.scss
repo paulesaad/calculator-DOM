@@ -1,7 +1,5 @@
-
 @import "../bower_components/normalize-css/normalize.css";
 @import "../bower_components/typeplate-starter-kit/css/typeplate.css";
-
 /**
  * BOX-SIZING
  */
@@ -11,7 +9,6 @@
 *:after {
     box-sizing: border-box;
 }
-
 /**
  * GRIDS
  */
@@ -37,7 +34,9 @@
     }
 }
 
-@define-mixin gridify $col, $width, $gutter: 2 {
+@define-mixin gridify $col,
+$width,
+$gutter: 2 {
     @media only screen and (min-width: $(width)px) {
         .grid-$(col)-$(width) {
             & > * {
@@ -48,9 +47,11 @@
     }
 }
 
-@mixin gridify 2, 400 {}
-@mixin gridify 4, 600 {}
+@mixin gridify 2,
+400 {}
 
+@mixin gridify 4,
+600 {}
 /**
  * PACE (automatic pre-loader thingy)
  */
@@ -88,3 +89,120 @@ img {
 /**
  * YOUR CODE HERE
  */
+
+ $solid: rgb(86, 168, 69);  
+ $light: rgb(114, 183, 101); 
+ $border: rgb(155, 205, 146);
+
+.container {
+    width: 300px;
+    font-size: 0;
+    color: white;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    margin: 2rem;
+    span {
+        text-align: center;
+        font-size: 1.3rem;
+    }
+    .display {
+        display: flex;
+        div {
+            background: $solid;
+            &:first-of-type {
+                flex-grow: 1;
+                position: relative;
+                border-right: 1px solid $border;
+                &:hover{
+                    background: $light;
+                }
+                &::after {
+                    content: '';
+                    display: block;
+                    padding-top: 100%;
+                }
+                span {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+            &:nth-of-type(2) {
+                flex-grow: 3;
+                position: relative;
+                span {
+                    position: absolute;
+                    top: 50%;
+                    right: 0;
+                    transform: translateY(-50%);
+                    padding-right: 10%;
+                }
+            }
+        }
+    }
+    .keys {
+        display:flex;
+        float: left;
+        width: 100%;
+        .numbers {
+            width: 75%;
+            flex-grow: 3;
+            > div {
+                display: flex;
+                &:nth-of-type(4){
+                    div:nth-of-type(3){
+                        &:hover {
+                            background: $light;
+                        }
+                    }
+                }   
+                >div {
+                    flex-grow: 1;
+                    border-top: 1px solid $border;
+                    border-right: 1px solid $border;
+                    position: relative;
+                    background: $solid;
+                    &::after {
+                        content: '';
+                        display: block;
+                        padding-top: 100%;
+                    }
+                    span {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+        }
+        .operators {
+            width: 24%;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            >div {
+                flex-grow: 1;
+                position: relative;
+                border-top: 1px solid $border;
+                background: $light;
+                color: black;
+                &:hover{
+                    color: white;
+                }
+                &::after {
+                    content: '';
+                    display: block;
+                    padding-top: 100%;
+                }
+                span {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+    }
+}
